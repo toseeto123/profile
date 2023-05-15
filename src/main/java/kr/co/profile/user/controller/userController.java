@@ -15,10 +15,10 @@ public class userController {
 	@Autowired
 	userService uService;
 	
-	@RequestMapping(value = "/userList", method = RequestMethod.POST)
+	@RequestMapping(value = "/userlist", method = RequestMethod.POST)
 	public String userInsert(userVO uvo) {
 		uService.addUser(uvo);
-		return "/user/userList";
+		return "redirect:/user/userList";
 	}
 	@RequestMapping(value = "/userlogin", method = RequestMethod.GET)
 	public String userLogin() {
