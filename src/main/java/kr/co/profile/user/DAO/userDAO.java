@@ -14,7 +14,8 @@ public class userDAO {
 	SqlSessionTemplate sqlSession;
 	
 	public void addUser(userVO uvo) {
-		sqlSession.insert("userDAO",uvo);
+		System.out.println("userdao 실행합니다");
+		sqlSession.insert("userDAO.insert", uvo);
 	}
 
 	
