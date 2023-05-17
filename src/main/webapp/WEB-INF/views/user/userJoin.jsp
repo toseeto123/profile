@@ -74,6 +74,15 @@
 	white-space: nowrap;
 	-webkit-overflow-scrolling: touch;
 }
+#pwckSuccess {
+	color:green;
+	display:none;
+}
+#pwckFail{
+ 	color:red;
+ 	display:none;
+}
+								
 </style>
 
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -121,26 +130,33 @@
 							<label for="username" class="form-label"></label>
 							<div>
 								<button class="w-100 btn btn-primary btn-lg" id="idck"
-									type="button">중복확인</button>
+									type="button" onclick="idCheck()">중복확인</button>
 							</div>
 						</div>
 
 						<div class="col-12">
 							<label for="userPassword" class="form-label">비밀번호</label>
 							<div class="input-group has-validation">
-								<input type="password" class="form-control" name="userPassword"
-									placeholder="비밀번호" required>
-								<div class="invalid-feedback">비밀번호는 필수 입력 사항입니다.</div>
+								<input type="password" class="form-control" name="userPassword" 
+								id="userPassword"
+									placeholder="비밀번호" autoComplete="off" required>
+								<div class="invalid-feedback">비밀번호는 필수 입력 사항입니다.
+								</div>
 							</div>
 						</div>
 
 						<div class="col-12">
 							<label for="passwordCheck" class="form-label">비밀번호확인</label>
 							<div class="input-group has-validation">
-								<input type="password" class="form-control" name="passwordCheck"
-									placeholder="비밀번호확인" required>
-								<div class="invalid-feedback">입력한 비밀번호와 맞는지 확인해주세요.</div>
+								<input type="password" class="form-control" name="passwordCheck" 
+								id="passwordCheck"
+									placeholder="비밀번호확인" autoComplete="off" required>
 							</div>
+							<div>
+								<span id="finalPassCheck">비밀번호 확인을 입력해주세요.</span>
+								<span id="pwckSuccess">비밀번호가 일치합니다.</span>
+								<span id="pwckFail">비밀번호가 일치하지 않습니다.</span>
+								</div>
 						</div>
 
 						<div class="col-12">
@@ -201,8 +217,8 @@
 					<hr class="my-4">
 
 					<button style="margin-bottom: 5px"
-						class="w-100 btn btn-primary btn-lg" type="submit">회원가입</button>
-					<button class="w-100 btn btn-primary btn-lg" type="submit">가입취소</button>
+						class="w-100 btn btn-primary btn-lg" type="submit" id="join">회원가입</button>
+					<button class="w-100 btn btn-primary btn-lg" type="reset">가입취소</button>
 				</form>
 			</div>
 		</div>
@@ -227,10 +243,8 @@
 
 	<script type="text/javascript">
 	 var idck=0;
-	 $(function() {
-		    $("#idck").click(function() {
-		     
-		        var userid =  $("#userId").val(); 
+	 function idCheck() {
+		        var userId =  $("#userId").val(); 
 		        
 		        $.ajax({
 		            async: true,
@@ -242,16 +256,10 @@
 		            success : function(data) {
 		                if (data.cnt > 0) {
 		                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
-		                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-		                   /*  $("#divInputId").addClass("has-error")
-		                    $("#divInputId").removeClass("has-success") */
 		                    $("#userId").focus();
 		                } else {
 		                    alert("사용가능한 아이디입니다.");
-		                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-		                    /* $("#divInputId").addClass("has-success")
-		                    $("#divInputId").removeClass("has-error") */
-		                    $("#userpwd").focus();
+		                    $("#userPassword").focus();
 		                    //아이디가 중복하지 않으면  idck = 1 
 		                    idck = 1;
 		                }
@@ -260,14 +268,14 @@
 		                alert("error : " + error);
 		            }
 		        });
-		    });
-		});
+		};
 	</script>
 
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 	<script>
+	//팝업창 위치 조정을 위한 width,height
 	var width = 500; 
 	var height = 600;
     function DaumPostcode() {
@@ -275,10 +283,6 @@
         	width: width,
         	height: height,
             oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var addr = ''; // 주소 변수
                 var extraAddr = ''; // 참고항목 변수
 
@@ -310,7 +314,6 @@
                 } else {
                     document.getElementById("userAddressDetail").value = '';
                 }
-
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('zip').value = data.zonecode;
                 document.getElementById("userAddress").value = addr;
@@ -318,10 +321,32 @@
                 document.getElementById("userAddressDetail").focus();
             }
         }).open({
+        	//팝업창 위치조절 사이
         	left: (window.innerWidth/ 2) - (width / 2),
             top: (window.innerHeight/ 2) - (height / 2)
         });
     }
+</script>
+
+<script>
+ $(function(){
+	 
+    $('#passwordCheck').keyup(function(){
+      var passwd = $('#userPassword').val();
+      var passwdck = $('#passwordCheck').val();
+      $('#finalPassCheck').css('display','none'); 
+      
+      if (passwd == passwdck){
+        $('#pwckSuccess').css('display','block');
+        $('#pwckFail').css('display','none');
+        // pwckOrCheck = true; // 어디에서 사용되는지에 따라 적절한 위치에 이 변수를 정의해야 합니다.
+      } else {
+        $('#pwckSuccess').css('display','none');
+        $('#pwckFail').css('display','block');
+        // pwckOrCheck = false; // 어디에서 사용되는지에 따라 적절한 위치에 이 변수를 정의해야 합니다.
+      }
+    });
+ });
 </script>
 </body>
 </html>
