@@ -15,5 +15,10 @@ public class userServiceImpl implements userService {
 	public void addUser(userVO uvo) {
 		userDao.addUser(uvo);
 	}
+	@Override
+	public int idcheck(String userId) {
+		userDao.idCheck(userId);
+		return 0;
+	}
 
 }

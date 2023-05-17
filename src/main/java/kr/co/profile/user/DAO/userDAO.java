@@ -18,5 +18,10 @@ public class userDAO {
 		sqlSession.insert("userDAO.insert", uvo);
 	}
 
+	public int idCheck(String userId) {
+		sqlSession.selectOne("userDAO.selectOne", userId);
+		return 0;
+	}
+
 	
 }
