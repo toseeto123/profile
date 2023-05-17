@@ -6,4 +6,6 @@ public interface userService {
 	
 	public void addUser(userVO uvo);
 
+	public int idcheck(String userId);
+
 }

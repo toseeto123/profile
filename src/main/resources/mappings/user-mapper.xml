@@ -8,6 +8,11 @@
   select * from profileUser
  </select> 
  
+ <select id="selectOne" parameterType="String" resultType="Integer">
+	select userCount(*) from profileUSer
+	where userId = #{userId}
+ </select>
+ 
  <insert id="insert" parameterType="kr.co.profile.user.VO.userVO">
 	insert into profileUser (userName,userId,userPassword,userEmail,userPhone,userAddress,userSkill)
 	values (#{userName}, #{userId}, #{userPassword}, #{userEmail}, #{userPhone}, #{userAddress}, #{userSkill})
