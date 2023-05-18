@@ -17,8 +17,8 @@ public class userServiceImpl implements userService {
 	}
 	@Override
 	public int idcheck(String userId) {
-		userDao.idCheck(userId);
-		return 0;
+			int count =  userDao.idCheck(userId);
+		 return count;
 	}
 
 }

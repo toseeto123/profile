@@ -9,7 +9,7 @@
  </select> 
  
  <select id="selectOne" parameterType="String" resultType="Integer">
-	select userCount from profileUser
+	select Count(*) from profileUser
 	where userId = #{userId}
  </select>
  
