@@ -23,7 +23,7 @@ public class userController {
 	@RequestMapping(value = "/userlist", method = RequestMethod.POST)
 	public String userInsert(userVO uvo) {
 		uService.addUser(uvo);
-		return "redirect:/user/userList";
+		return "redirect:/users/userlogin";
 	}
 	@RequestMapping(value = "/idcheck", method = RequestMethod.POST)
 	 @ResponseBody //responsebody 를 사용하여 JSON으로 넘어온 userid 매개변수로 받음
@@ -31,6 +31,7 @@ public class userController {
 		int count = 0;
 		Map<Object, Object> map = new HashMap<Object,Object>();
 		count = uService.idcheck(userId);
+		System.out.println(count);
 		map.put("cnt", count);
 		return map;
 	}

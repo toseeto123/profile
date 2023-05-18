@@ -19,9 +19,7 @@ public class userDAO {
 	}
 
 	public int idCheck(String userId) {
-		sqlSession.selectOne("userDAO.selectOne", userId);
-		return 0;
+		int count = sqlSession.selectOne("userDAO.selectOne", userId);
+		return count;
 	}
-
-	
 }

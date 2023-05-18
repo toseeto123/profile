@@ -74,15 +74,16 @@
 	white-space: nowrap;
 	-webkit-overflow-scrolling: touch;
 }
+
 #pwckSuccess {
-	color:green;
-	display:none;
+	color: green;
+	display: none;
 }
-#pwckFail{
- 	color:red;
- 	display:none;
+
+#pwckFail {
+	color: red;
+	display: none;
 }
-								
 </style>
 
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -107,7 +108,7 @@
 				<h4 class="mb-3 ">회원 가입 정보</h4>
 				<br>
 				<form class="needs-validation" action="/users/userlist"
-					method="post" novalidate>
+					method="post" onsubmit="submitForm()" novalidate>
 					<div class="row g-3">
 						<div class="col-sm-15">
 							<label for="userName" class="form-label">이름</label> <input
@@ -137,26 +138,25 @@
 						<div class="col-12">
 							<label for="userPassword" class="form-label">비밀번호</label>
 							<div class="input-group has-validation">
-								<input type="password" class="form-control" name="userPassword" 
-								id="userPassword"
-									placeholder="비밀번호" autoComplete="off" required>
-								<div class="invalid-feedback">비밀번호는 필수 입력 사항입니다.
-								</div>
+								<input type="password" class="form-control" name="userPassword"
+									id="userPassword" placeholder="비밀번호" autoComplete="off"
+							   		required>
+								<div class="invalid-feedback">비밀번호는 필수 입력 사항입니다.</div>
 							</div>
 						</div>
 
 						<div class="col-12">
 							<label for="passwordCheck" class="form-label">비밀번호확인</label>
 							<div class="input-group has-validation">
-								<input type="password" class="form-control" name="passwordCheck" 
-								id="passwordCheck"
-									placeholder="비밀번호확인" autoComplete="off" required>
+								<input type="password" class="form-control" name="passwordCheck"
+									id="passwordCheck" placeholder="비밀번호확인" autoComplete="off"
+									required>
 							</div>
 							<div>
-								<span id="finalPassCheck">비밀번호 확인을 입력해주세요.</span>
-								<span id="pwckSuccess">비밀번호가 일치합니다.</span>
-								<span id="pwckFail">비밀번호가 일치하지 않습니다.</span>
-								</div>
+								<span id="finalPassCheck">비밀번호 확인을 입력해주세요.</span> <span
+									id="pwckSuccess">비밀번호가 일치합니다.</span> <span id="pwckFail">비밀번호가
+									일치하지 않습니다.</span>
+							</div>
 						</div>
 
 						<div class="col-12">
@@ -185,8 +185,8 @@
 
 						<div class="col-12">
 							<label for="address" class="form-label">주소</label> <input
-								type="text" class="form-control" name="userAddress" id="userAddress"
-								placeholder="무슨 동" required>
+								type="text" class="form-control" name="basicAddress"
+								id="basicAddress" placeholder="무슨 동" required>
 							<div class="invalid-feedback">현재 주소와 맞는지 다시 한번 확인해주세요</div>
 						</div>
 
@@ -201,17 +201,18 @@
 
 						<div class="col-sm-4">
 							<span> <label for="zip" class="form-label">우편번호</label> <input
-								type="text" class="form-control" id="zip" name="zip" placeholder="">
+								type="text" class="form-control" id="zip" name="zip"
+								placeholder="">
 							</span>
 						</div>
 
 						<div class="col-sm-2" align="cetner">
 							<label></label>
-							<button class="w-100 btn btn-primary btn-lg" type="button" onclick="DaumPostcode()">주소 찾기</button>
+							<button class="w-100 btn btn-primary btn-lg" type="button"
+								onclick="DaumPostcode()">주소 찾기</button>
 						</div>
 
-
-
+						<input type="hidden" id="userAddress" name="userAddress">
 					</div>
 
 					<hr class="my-4">
@@ -242,6 +243,7 @@
 		src="${pageContext.request.contextPath}/resources/static/js/form-validation.js"></script>
 
 	<script type="text/javascript">
+	
 	 var idck=0;
 	 function idCheck() {
 		        var userId =  $("#userId").val(); 
@@ -260,7 +262,6 @@
 		                } else {
 		                    alert("사용가능한 아이디입니다.");
 		                    $("#userPassword").focus();
-		                    //아이디가 중복하지 않으면  idck = 1 
 		                    idck = 1;
 		                }
 		            },
@@ -273,7 +274,7 @@
 
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	
+
 	<script>
 	//팝업창 위치 조정을 위한 width,height
 	var width = 500; 
@@ -316,7 +317,7 @@
                 }
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('zip').value = data.zonecode;
-                document.getElementById("userAddress").value = addr;
+                document.getElementById("basicAddress").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("userAddressDetail").focus();
             }
@@ -330,7 +331,6 @@
 
 <script>
  $(function(){
-	 
     $('#passwordCheck').keyup(function(){
       var passwd = $('#userPassword').val();
       var passwdck = $('#passwordCheck').val();
@@ -339,14 +339,43 @@
       if (passwd == passwdck){
         $('#pwckSuccess').css('display','block');
         $('#pwckFail').css('display','none');
-        // pwckOrCheck = true; // 어디에서 사용되는지에 따라 적절한 위치에 이 변수를 정의해야 합니다.
       } else {
         $('#pwckSuccess').css('display','none');
         $('#pwckFail').css('display','block');
-        // pwckOrCheck = false; // 어디에서 사용되는지에 따라 적절한 위치에 이 변수를 정의해야 합니다.
       }
     });
  });
+</script>
+	<script>
+  function submitForm() {
+    var basicAddress = document.getElementById('basicAddress').value;
+    var userAddressDetail = document.getElementById('userAddressDetail').value;
+    var zip = document.getElementById('zip').value;
+    
+    var userAddress = basicAddress + ' ' + userAddressDetail + ' ' + zip;
+    
+    // form 태그에 값을 설정하여 전송
+    document.getElementById('userAddress').value = userAddress;
+    console.log(userAddress);
+    
+  }
+</script>
+	<script>
+	 $('#userPassword').blur(function(){
+		 var passwd = $('#userPassword').val();
+	     var passwdck = $('#passwordCheck').val();
+			const exp2 = /^(?=.*[a-z])(?=.*\d)(?=.*[-_!*])[a-z\d-_!*]{8,20}$/; 
+
+			if(passwd.match(exp2)){
+				 alert("올바른 비밀번호입니다.")
+				 $("#passwordCheck").focus();
+				 return;
+			}else{
+				alert('8~20자리 소문자, 특수기호(-_!*), 숫자 포함해주세요');
+				 $("#userPassword").focus();
+				 return;
+			}
+		});
 </script>
 </body>
 </html>
