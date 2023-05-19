@@ -20,5 +20,9 @@ public class userServiceImpl implements userService {
 			int count =  userDao.idCheck(userId);
 		 return count;
 	}
-
+	@Override
+	public userVO findById(Long memberId) {
+		return userDao.findById(memberId);
+		
+	}
 }
