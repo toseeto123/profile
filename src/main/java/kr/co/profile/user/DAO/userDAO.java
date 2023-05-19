@@ -22,4 +22,8 @@ public class userDAO {
 		int count = sqlSession.selectOne("userDAO.selectOne", userId);
 		return count;
 	}
+
+	public userVO findById(Long memberId) {
+		return sqlSession.selectOne("userDAO.select",memberId);
+	}
 }

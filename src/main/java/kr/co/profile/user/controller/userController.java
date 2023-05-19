@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,10 +37,16 @@ public class userController {
 		map.put("cnt", count);
 		return map;
 	}
-	@RequestMapping(value = "/userlogin", method = RequestMethod.GET)
-	public String userLogin() {
-		
-		return "/user/userLogin";
+	@RequestMapping(value = "/userlogin", method = RequestMethod.POST)
+	public String userLogin(@CookieValue(name="memberId",required = false) Long memberId,Model model) {
+		if (memberId == null) 
+		return "/users/userLogin";
+		 
+		 //로그인
+		 userVO loginMember = uService.findById(memberId);
+		 if (loginMember == null) return "home";
+		 model.addAttribute("member", loginMember);
+		 return "loginHome";
 	}
 	@RequestMapping(value = "/userjoin", method = RequestMethod.GET)
 	public String userJoin() {

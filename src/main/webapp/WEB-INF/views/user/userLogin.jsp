@@ -77,7 +77,7 @@
   <body class="text-center">
     
 <main class="form-signin w-100 m-auto">
-  <form>
+  <form action="/users/login" method="post">
     <img class="mb-4" src="${pageContext.request.contextPath}/resources/static/assets/brand/로고.svg" alt="logo" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">로 그 인</h1>
 

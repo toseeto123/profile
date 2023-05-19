@@ -8,4 +8,6 @@ public interface userService {
 
 	public int idcheck(String userId);
 
+	public userVO findById(Long memberId);
+
 }
