@@ -32,6 +32,20 @@
 # 참여인원 1명 개인 프로젝트
 #### 김남수: 프로젝트 설계, 회원가입,로그인, UX/UI 제작, DB설계 및 구현,우편번호 API연동,포트폴리오 페이지 구성(예정), Q&A게시판(예정),마이페이지(예정)
 
+#Table 정보
+<div align="left">CREATE TABLE `profileUser` ( <br>
+  `userNo` int(30) NOT NULL AUTO_INCREMENT, <br>
+  `userName` varchar(50) NOT NULL,<br>
+  `userId` varchar(50) NOT NULL,<br>
+  `userPassword` varchar(50) NOT NULL,<br>
+  `userEmail` varchar(50) NOT NULL,<br>
+  `userPhone` int(30) NOT NULL,<br>
+  `userAddress` varchar(300) NOT NULL,<br>
+  `userSkill` varchar(500) NOT NULL,<br>
+  `userCount` int(4) NOT NULL DEFAULT 1,<br>
+  PRIMARY KEY (`userNo`)<br>
+) DEFAULT CHARSET=utf8;<br>
+</div>
   
  
  
