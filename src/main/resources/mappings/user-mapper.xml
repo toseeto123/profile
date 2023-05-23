@@ -13,6 +13,11 @@
 	where userId = #{userId}
  </select>
  
+ <select id="login" resultType="kr.co.profile.user.VO.userVO">
+	select * from profileUser
+	where userId = #{userId} And userPassword = #{userPassword}
+ </select>
+ 
  <insert id="insert" parameterType="kr.co.profile.user.VO.userVO">
 	insert into profileUser (userName,userId,userPassword,userEmail,userPhone,userAddress,userSkill)
 	values (#{userName}, #{userId}, #{userPassword}, #{userEmail}, #{userPhone}, #{userAddress}, #{userSkill})

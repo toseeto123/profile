@@ -4,6 +4,8 @@ public class userVO {
 
 	private int userNo,userPhone;
 	private String userName,userId,userPassword,userEmail,userAddress,userSkill;
+	private boolean useCookie;
+	
 	public int getUserNo() {
 		return userNo;
 	}
@@ -59,7 +61,12 @@ public class userVO {
 				+ ", userPassword=" + userPassword + ", userEmail=" + userEmail + ", userAddress=" + userAddress
 				+ ", userSkill=" + userSkill + "]";
 	}
-	
+	public boolean isUseCookie() {
+		return useCookie;
+	}
+	public void setUseCookie(boolean useCookie) {
+		this.useCookie = useCookie;
+	}
 	
 	
 }

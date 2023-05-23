@@ -9,9 +9,13 @@ import kr.co.profile.user.VO.userVO;
 
 @Repository
 public class userDAO {
+	
+	
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
+	
+
 	
 	public void addUser(userVO uvo) {
 		System.out.println("userdao 실행합니다");
@@ -23,7 +27,8 @@ public class userDAO {
 		return count;
 	}
 
-	public userVO findById(Long memberId) {
-		return sqlSession.selectOne("userDAO.select",memberId);
+
+	public userVO login(userVO uvo) {
+		return sqlSession.selectOne("userDAO.login",uvo);
 	}
 }
