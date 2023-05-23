@@ -3,6 +3,9 @@ package kr.co.profile.user.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +25,12 @@ public class userController {
 	@Autowired
 	userService uService;
 	
+	
+	@RequestMapping(value = "/userjoin", method = RequestMethod.GET)
+	public String userJoin() {
+		
+		return "/user/userJoin";
+	}
 	@RequestMapping(value = "/userlist", method = RequestMethod.POST)
 	public String userInsert(userVO uvo) {
 		uService.addUser(uvo);
@@ -37,21 +46,40 @@ public class userController {
 		map.put("cnt", count);
 		return map;
 	}
-	@RequestMapping(value = "/userlogin", method = RequestMethod.POST)
-	public String userLogin(@CookieValue(name="memberId",required = false) Long memberId,Model model) {
-		if (memberId == null) 
-		return "/users/userLogin";
-		 
-		 //로그인
-		 userVO loginMember = uService.findById(memberId);
-		 if (loginMember == null) return "home";
-		 model.addAttribute("member", loginMember);
-		 return "loginHome";
-	}
-	@RequestMapping(value = "/userjoin", method = RequestMethod.GET)
-	public String userJoin() {
-		
-		return "/user/userJoin";
+	@RequestMapping(value="/userlogin", method = RequestMethod.GET)
+	public String userLogin() {
+		return "/user/userLogin";
 	}
 	
+	@RequestMapping(value = "/userlogin", method = RequestMethod.POST)
+	public String userLogin(HttpSession session,userVO uvo,HttpServletResponse response) {
+		String returnURL ="";
+		if(session.getAttribute("login")!= null) {
+			//기존에 login이라는 session이 존재할경우	
+			session.removeAttribute("login");
+		}
+		//로그인 성공할 경우 userVO 객체 반환
+		userVO vo = uService.login(uvo);
+		
+		//로그인이 성공하는 경우
+		if( uvo != null) {
+			session.setAttribute("login", uvo); //세션에 login이란 이름으로 userVO저장
+			returnURL = "redirect:/"; //로그인 성공시 index로 가게 함
+		}else {
+			returnURL = "redirect:/user/userlogin";
+		}
+		//세션 추가
+		//로그인이 성공시 로그인폼에서 쿠키가 체크된 상태로 로그인 요청이 왔는지 확인
+//		if( uvo.isUseCookie()) {
+//			
+//		}
+		return returnURL; 
+	}
+	
+	//로그아웃
+	public String logout(HttpSession session) {
+		String returnURL;
+		session.invalidate();
+		return "redirect:/";
+	}
 }

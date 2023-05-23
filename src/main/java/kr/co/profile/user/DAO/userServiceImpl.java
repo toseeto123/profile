@@ -21,8 +21,7 @@ public class userServiceImpl implements userService {
 		 return count;
 	}
 	@Override
-	public userVO findById(Long memberId) {
-		return userDao.findById(memberId);
-		
+	public userVO login(userVO uvo) {
+		return userDao.login(uvo);
 	}
 }

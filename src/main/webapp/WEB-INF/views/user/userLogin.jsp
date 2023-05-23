@@ -92,7 +92,7 @@
 
     <div class="checkbox mb-3">
       <label>
-        <input type="checkbox" value="remember-me"> Remember me
+        <input type="checkbox" value="remember-me"> 자동로그인
       </label>
     </div>
     <div>
