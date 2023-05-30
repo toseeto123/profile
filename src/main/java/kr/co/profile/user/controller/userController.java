@@ -3,6 +3,7 @@ package kr.co.profile.user.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -52,28 +53,33 @@ public class userController {
 	}
 	
 	@RequestMapping(value = "/userlogin", method = RequestMethod.POST)
-	public String userLogin(HttpSession session,userVO uvo,HttpServletResponse response) {
+	public String userLogin(HttpSession session,userVO uvo,HttpServletResponse response,HttpServletRequest request) {
 		String returnURL ="";
-		if(session.getAttribute("login")!= null) {
-			//기존에 login이라는 session이 존재할경우	
-			session.removeAttribute("login");
-		}
+//		if(session.getAttribute("login")!= null) {
+//			//기존에 login이라는 session이 존재할경우	
+//			session.removeAttribute("login");
+//		}
 		//로그인 성공할 경우 userVO 객체 반환
 		userVO vo = uService.login(uvo);
+		System.out.println(vo);
 		
 		//로그인이 성공하는 경우
 		if( uvo != null) {
 			session.setAttribute("login", uvo); //세션에 login이란 이름으로 userVO저장
+			System.out.println("로그인성공");
 			returnURL = "redirect:/"; //로그인 성공시 index로 가게 함
 		}else {
-			returnURL = "redirect:/user/userlogin";
+			request.setAttribute("msg", "로그인에 실패하였습니다");
+			System.out.println("로그인실패");
+			request.setAttribute("url", "/user/userLogin");
+			returnURL = "/commons/alert";
 		}
 		//세션 추가
 		//로그인이 성공시 로그인폼에서 쿠키가 체크된 상태로 로그인 요청이 왔는지 확인
 //		if( uvo.isUseCookie()) {
 //			
 //		}
-		return returnURL; 
+		return "/commons/alert"; 
 	}
 	
 	//로그아웃
