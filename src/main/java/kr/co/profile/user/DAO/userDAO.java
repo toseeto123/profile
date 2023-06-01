@@ -29,6 +29,7 @@ public class userDAO {
 
 
 	public userVO login(userVO uvo) {
+		System.out.println("dao uvo" + uvo);
 		return sqlSession.selectOne("userDAO.login",uvo);
 	}
 }
