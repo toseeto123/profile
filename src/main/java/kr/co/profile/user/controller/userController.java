@@ -64,14 +64,14 @@ public class userController {
 		System.out.println(vo);
 		
 		//로그인이 성공하는 경우
-		if( uvo != null) {
+		if( vo != null) {
 			session.setAttribute("login", uvo); //세션에 login이란 이름으로 userVO저장
 			System.out.println("로그인성공");
 			returnURL = "redirect:/"; //로그인 성공시 index로 가게 함
 		}else {
 			request.setAttribute("msg", "로그인에 실패하였습니다");
 			System.out.println("로그인실패");
-			request.setAttribute("url", "/user/userLogin");
+			request.setAttribute("url", "/users/userlogin");
 			returnURL = "/commons/alert";
 		}
 		//세션 추가
@@ -79,7 +79,7 @@ public class userController {
 //		if( uvo.isUseCookie()) {
 //			
 //		}
-		return "/commons/alert"; 
+		return returnURL; 
 	}
 	
 	//로그아웃

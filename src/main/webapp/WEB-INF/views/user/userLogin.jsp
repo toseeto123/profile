@@ -82,11 +82,11 @@
     <h1 class="h3 mb-3 fw-normal">로 그 인</h1>
 
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="userId">
       <label for="floatingInput">Id</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="userPassword">
       <label for="floatingPassword">비밀번호</label>
     </div>
 
