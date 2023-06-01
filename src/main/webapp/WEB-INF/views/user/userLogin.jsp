@@ -68,7 +68,7 @@
         -webkit-overflow-scrolling: touch;
       }
     </style>
-
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
     
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath}/resources/static/css/signin.css" rel="stylesheet">
@@ -92,7 +92,7 @@
 
     <div class="checkbox mb-3">
       <label>
-        <input type="checkbox" value="remember-me"> 자동로그인
+        <input type="checkbox" value="remember-me" id="autologin" name="autologin"> 자동로그인
       </label>
     </div>
     <div>
@@ -104,6 +104,28 @@
   </form>
 </main>
 
+<script>
+ $("#autologin").click(function (){
+	 const autoLogin = $('input[name=autologin]'.is(":checked"));
+	 console.log("autologin" + autoLogin);
+	 
+	 const isUseCookie = {
+			 autoLogin : autoLogin
+	 };
+	 $.ajax({
+		 type:"POST",
+		 url:"//users/userlogin",
+		 headers: {
+			 "Content-type" : "application/json"
+		 },
+		 data:JSON.stringify(isUseCookie),
+		 dataType: "text",
+		 success: function(data){
+			 
+		 }
+	 })
+ })
+</script>
 
 </body>
 

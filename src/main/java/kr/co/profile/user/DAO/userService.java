@@ -1,5 +1,7 @@
 package kr.co.profile.user.DAO;
 
+import java.util.Date;
+
 import kr.co.profile.user.VO.userVO;
 
 public interface userService {
@@ -10,5 +12,7 @@ public interface userService {
 
 	public userVO login(userVO uvo);
 
-
+	public void keepLogin(String userId, String sessionId, Date next);
+	
+	public userVO checkUserSessionKey(String sessionId);
 }
