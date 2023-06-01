@@ -14,10 +14,16 @@
  </select>
  
  <select id="login" resultType="kr.co.profile.user.VO.userVO">
-
 	select * from profileUser
 	where userId = #{userId} And userPassword = #{userPassword}
-	
+ </select>
+ 
+ <update id="keepLogin">
+ 	update profileUser set sessionKey = #{sessionId}, sessionLimit = #{next} where userId= #{userId}
+ </update>
+ 
+ <select id="checkUserSessionKey" resultType="kr.co.profile.user.VO.userVO">
+ 	select * from profileUser where sessionKey = #{sessionId} and sessionLimit > now()
  </select>
  
  <insert id="insert" parameterType="kr.co.profile.user.VO.userVO">

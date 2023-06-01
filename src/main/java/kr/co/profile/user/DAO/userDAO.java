@@ -1,6 +1,8 @@
 package kr.co.profile.user.DAO;
 
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,4 +34,13 @@ public class userDAO {
 		System.out.println("dao uvo" + uvo);
 		return sqlSession.selectOne("userDAO.login",uvo);
 	}
+
+	public void keepLogin(Map<String, Object> map) {
+		sqlSession.update("userDAO.keepLogin", map);
+	}
+
+	public userVO checkUserSessionKey(String sessionId) {
+		return sqlSession.selectOne("userDAO.checkUserSessionKey", sessionId);
+	}
+
 }
