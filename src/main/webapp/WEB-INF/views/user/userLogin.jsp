@@ -104,25 +104,6 @@
   </form>
 </main>
 
-<script>
- $("#autologin").click(function (){
-	 const autoLogin = $('input[name=autologin]'.is(":checked"));
-	 console.log("autologin" + autoLogin);
-	 
-	 const isUseCookie = {
-			 autoLogin : autoLogin
-	 };
-	 $.ajax({
-		 type:"POST",
-		 url:"//users/userlogin",
-		 headers: {
-			 "Content-type" : "application/json"
-		 },
-		 data:JSON.stringify(isUseCookie),
-		 dataType: "text",
-	 })
- })
-</script>
 
 </body>
 
