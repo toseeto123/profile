@@ -73,7 +73,8 @@ public class userController {
 			returnURL = "redirect:/"; //로그인 성공시 index로 가게 함
 			
 			// 로그인 관련 쿠키 사용(자동로그인)
-			if(vo.isUseCookie()) {
+			if(request.getParameter("autologin") != null) {
+				System.out.println("쿠키 들어왔습니다.");
 				//쿠키를 생성하고 로그인되어 있을때 생성된 세션id를 쿠키에 저장
 				Cookie cookie = new Cookie("loginCookie", session.getId());
 				//쿠키 찾을 경로
