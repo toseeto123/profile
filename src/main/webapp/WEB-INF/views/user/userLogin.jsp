@@ -120,9 +120,6 @@
 		 },
 		 data:JSON.stringify(isUseCookie),
 		 dataType: "text",
-		 success: function(data){
-			 
-		 }
 	 })
  })
 </script>
