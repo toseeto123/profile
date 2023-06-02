@@ -1,11 +1,27 @@
 package kr.co.profile.user.VO;
 
+import java.util.Date;
+
 public class userVO {
 
 	private int userNo,userPhone;
 	private String userName,userId,userPassword,userEmail,userAddress,userSkill;
 	private boolean useCookie;
+	private String sessionId;
+	private Date sessionLimit;
 	
+	public String getSessionId() {
+		return sessionId;
+	}
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+	public Date getSessionLimit() {
+		return sessionLimit;
+	}
+	public void setSessionLimit(Date sessionLimit) {
+		this.sessionLimit = sessionLimit;
+	}
 	public int getUserNo() {
 		return userNo;
 	}
@@ -59,7 +75,8 @@ public class userVO {
 	public String toString() {
 		return "userVO [userNo=" + userNo + ", userPhone=" + userPhone + ", userName=" + userName + ", userId=" + userId
 				+ ", userPassword=" + userPassword + ", userEmail=" + userEmail + ", userAddress=" + userAddress
-				+ ", userSkill=" + userSkill + "]";
+				+ ", userSkill=" + userSkill + ", useCookie=" + useCookie + ", sessionId=" + sessionId
+				+ ", sessionLimit=" + sessionLimit + "]";
 	}
 	public boolean isUseCookie() {
 		return useCookie;

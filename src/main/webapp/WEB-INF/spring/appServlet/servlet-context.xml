@@ -40,6 +40,14 @@
          ref="sqlSessionFactory" />
    </beans:bean>
 
+	<interceptors>
+      <interceptor>
+        	<mapping path="/users/**" />
+        	<!-- <exclude-mapping path="/users/userlogin"/> -->
+        	<exclude-mapping path="/users/userjoin"/>
+         <beans:bean   class="kr.co.profile.user.interceptor.Interceptor" />
+      </interceptor>
+   </interceptors> 
 
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->

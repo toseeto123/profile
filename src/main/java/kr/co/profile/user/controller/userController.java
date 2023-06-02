@@ -101,6 +101,7 @@ public class userController {
 	}
 	
 	//로그아웃
+	@RequestMapping(value = "/userlogout")
 	public String logout(HttpSession session,HttpServletRequest request, HttpServletResponse response) {
 		String returnURL;
 		Object obj = session.getAttribute("login");
