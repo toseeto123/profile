@@ -74,16 +74,15 @@ public class userController {
 			
 			// 로그인 관련 쿠키 사용(자동로그인)
 			if(request.getParameter("autologin") != null) {
-				System.out.println("쿠키 들어왔습니다.");
 				//쿠키를 생성하고 로그인되어 있을때 생성된 세션id를 쿠키에 저장
-				Cookie cookie = new Cookie("loginCookie", session.getId());
+				Cookie loginCookie = new Cookie("loginCookie", session.getId());
 				//쿠키 찾을 경로
 				int amount = 60 * 60 * 24 * 7;
-				cookie.setPath("/");
-				cookie.setMaxAge(amount);
+				loginCookie.setPath("/");
+				loginCookie.setMaxAge(amount);
 				//쿠키 적용
-				response.addCookie(cookie);
-				System.out.println("cookie자동로그인:" + cookie);
+				response.addCookie(loginCookie);
+				System.out.println("cookie자동로그인:" + loginCookie);
 				//currentTImeMillis가 1/1000초 단위이기때문에 1000곱해서 더해준다.
 				Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount));
 				//현재 세션 id와 유효시간을 사용자 테이블에 저

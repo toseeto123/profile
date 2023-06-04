@@ -27,7 +27,7 @@ public class Interceptor extends HandlerInterceptorAdapter{
 		Object obj = session.getAttribute("login");
 		userVO uvo;
 		
-		if(obj == null) { //로그인 세션 없는경우
+		if(obj == null) { //로그인 세션 없는경우 만들어놓은 쿠키 가져오기
 			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
 			if(loginCookie != null) { //이전에 생성한 쿠키가 존재하는 경우
 				String sessionId = loginCookie.getValue();
@@ -35,7 +35,7 @@ public class Interceptor extends HandlerInterceptorAdapter{
 				uvo = uService.checkUserSessionKey(sessionId);
 				if(uvo != null) {	//세션아이디를 가지고 있는 사용자가 존재하는 경우
 					session.setAttribute("login", uvo);
-					System.out.println("interceptor uvo입니다" +uvo);
+					System.out.println("자동로그인 합니다." +uvo);
 					return true;
 				}
 			}
