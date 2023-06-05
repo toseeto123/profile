@@ -26,9 +26,17 @@
  	select * from profileUser where sessionKey = #{sessionId} and sessionLimit > now()
  </select>
  
+ <select id="getMyInfo" parameterType="kr.co.profile.user.VO.userVO" resultType="kr.co.profile.user.VO.userVO">
+ 	select * from profileUser where userId = #{userId}
+ </select>
+ 
  <insert id="insert" parameterType="kr.co.profile.user.VO.userVO">
-	insert into profileUser (userName,userId,userPassword,userEmail,userPhone,userAddress,userSkill)
-	values (#{userName}, #{userId}, #{userPassword}, #{userEmail}, #{userPhone}, #{userAddress}, #{userSkill})
+	insert into profileUser (userName,userId,userPassword,userEmail,userPhone,basicAddress,userAddressDetail,zip,userSkill)
+	values (#{userName}, #{userId}, #{userPassword}, #{userEmail}, #{userPhone}, #{basicAddress}, #{userAddressDetail}, #{zip},#{userSkill})
  </insert>  
 
+ <delete id="deleteMyInfo" parameterType="kr.co.profile.user.VO.userVO">
+ 	delete from profileUser where userId=#{userId}
+ </delete>
+ 
 </mapper>

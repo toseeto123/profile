@@ -40,12 +40,18 @@
          ref="sqlSessionFactory" />
    </beans:bean>
 
+
 	<interceptors>
       <interceptor>
-        	<mapping path="/users/**" />
+        	<mapping path="/**"/>
         	 <exclude-mapping path="/users/userlogin"/> 
-        	<exclude-mapping path="/users/userjoin"/>
-         <beans:bean   class="kr.co.profile.user.interceptor.Interceptor" />
+        	 <exclude-mapping path="/users/userjoin"/>  
+        	 <exclude-mapping path="/users/idcheck"/>
+        	 <exclude-mapping path="/users/mypage"/>
+        	 <exclude-mapping path="/users/userupdate"/>
+        	 <exclude-mapping path="/users/delete/**"/>
+        	 <exclude-mapping path="/users/userlist"/>
+         <beans:bean class="kr.co.profile.user.interceptor.Interceptor" />
       </interceptor>
    </interceptors> 
 

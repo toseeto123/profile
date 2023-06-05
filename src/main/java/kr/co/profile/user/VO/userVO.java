@@ -5,7 +5,7 @@ import java.util.Date;
 public class userVO {
 
 	private int userNo,userPhone;
-	private String userName,userId,userPassword,userEmail,userAddress,userSkill;
+	private String userName,userId,userPassword,userEmail,basicAddress,userAddressDetail,zip,userSkill;
 	private boolean useCookie;
 	private String sessionId;
 	private Date sessionLimit;
@@ -58,11 +58,25 @@ public class userVO {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	public String getUserAddress() {
-		return userAddress;
+	
+	
+	public String getBasicAddress() {
+		return basicAddress;
 	}
-	public void setUserAddress(String userAddress) {
-		this.userAddress = userAddress;
+	public void setBasicAddress(String basicAddress) {
+		this.basicAddress = basicAddress;
+	}
+	public String getUserAddressDetail() {
+		return userAddressDetail;
+	}
+	public void setUserAddressDetail(String userAddressDetail) {
+		this.userAddressDetail = userAddressDetail;
+	}
+	public String getZip() {
+		return zip;
+	}
+	public void setZip(String zip) {
+		this.zip = zip;
 	}
 	public String getUserSkill() {
 		return userSkill;
@@ -71,12 +85,13 @@ public class userVO {
 		this.userSkill = userSkill;
 	}
 	
+	
 	@Override
 	public String toString() {
 		return "userVO [userNo=" + userNo + ", userPhone=" + userPhone + ", userName=" + userName + ", userId=" + userId
-				+ ", userPassword=" + userPassword + ", userEmail=" + userEmail + ", userAddress=" + userAddress
-				+ ", userSkill=" + userSkill + ", useCookie=" + useCookie + ", sessionId=" + sessionId
-				+ ", sessionLimit=" + sessionLimit + "]";
+				+ ", userPassword=" + userPassword + ", userEmail=" + userEmail + ", basicAddress=" + basicAddress
+				+ ", userAddressDetail=" + userAddressDetail + ", zip=" + zip + ", userSkill=" + userSkill
+				+ ", useCookie=" + useCookie + ", sessionId=" + sessionId + ", sessionLimit=" + sessionLimit + "]";
 	}
 	public boolean isUseCookie() {
 		return useCookie;

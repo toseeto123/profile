@@ -15,4 +15,8 @@ public interface userService {
 	public void keepLogin(String userId, String sessionId, Date next);
 	
 	public userVO checkUserSessionKey(String sessionId);
+
+	public userVO getmyInfo(userVO uvo);
+
+	public void deleteMyInfo(userVO uvo);
 }

@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
@@ -15,6 +15,7 @@ import kr.co.profile.user.DAO.userService;
 import kr.co.profile.user.VO.userVO;
 
 //로그인 처리 담당 인터셉터
+
 public class Interceptor extends HandlerInterceptorAdapter{
 	@Autowired
 	userService uService;
@@ -26,16 +27,18 @@ public class Interceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("login");
 		userVO uvo;
-		
+		System.out.println(obj);
+	
 		if(obj == null) { //로그인 세션 없는경우 만들어놓은 쿠키 가져오기
 			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+			System.out.println("interceptor loginCookie:" + loginCookie);
 			if(loginCookie != null) { //이전에 생성한 쿠키가 존재하는 경우
 				String sessionId = loginCookie.getValue();
 				System.out.println(sessionId);
 				uvo = uService.checkUserSessionKey(sessionId);
 				if(uvo != null) {	//세션아이디를 가지고 있는 사용자가 존재하는 경우
 					session.setAttribute("login", uvo);
-					System.out.println("자동로그인 합니다." +uvo);
+					System.out.println("interceptor 자동로그인 합니다." +uvo);
 					return true;
 				}
 			}
