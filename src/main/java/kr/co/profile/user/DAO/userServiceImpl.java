@@ -28,7 +28,7 @@ public class userServiceImpl implements userService {
 	public userVO login(userVO uvo) {
 		return userDao.login(uvo);
 	}
-	//자동로그인을 체크한 경우에 사용자 테이블에 세션, 유효시간을 저
+	//자동로그인을 체크한 경우에 사용자 테이블에 세션, 유효시간을 저장
 	@Override
 	public void keepLogin(String userId, String sessionId, Date next) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -43,5 +43,13 @@ public class userServiceImpl implements userService {
 	@Override
 	public userVO checkUserSessionKey(String sessionId) {
 		return userDao.checkUserSessionKey(sessionId);
+	}
+	@Override
+	public userVO getmyInfo(userVO uvo) {
+		return userDao.getMyInfo(uvo);
+	}
+@Override
+	public void deleteMyInfo(userVO uvo) {
+		userDao.deleteMyInfo(uvo);
 	}
 }

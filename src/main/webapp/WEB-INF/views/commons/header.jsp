@@ -37,7 +37,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="/users/portfolio">포트폴리오</a></li>
                         <li class="nav-item"><a class="nav-link" href="/users/userlogout">로그아웃</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/users/userpage">마이페이지</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/users/mypage">마이페이지</a></li>
                     </ul>
                 </div>
             </div>

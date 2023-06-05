@@ -43,4 +43,12 @@ public class userDAO {
 		return sqlSession.selectOne("userDAO.checkUserSessionKey", sessionId);
 	}
 
+	public userVO getMyInfo(userVO uvo) {
+		return sqlSession.selectOne("userDAO.getMyInfo",uvo);
+	}
+
+	public void deleteMyInfo(userVO uvo) {
+		sqlSession.delete("userDAO.deleteMyInfo",uvo);
+	}
+
 }

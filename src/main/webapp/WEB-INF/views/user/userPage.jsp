@@ -98,14 +98,14 @@
 	<div class="container">
 		<main>
 		<div class="py-5 text-center">
-			<h2>회원 가입 페이지</h2>
+			<h2>내 정보</h2>
 			<p class="lead">필수 입력 사항은 반드시 입력해주시기 바랍니다.</p>
 		</div>
 
 		<div class="py-5 text-left">
 
 			<div class="col-md-15">
-				<h4 class="mb-3 ">회원 가입 정보</h4>
+				<h4 class="mb-3 ">나의 회원 정보</h4>
 				<br>
 				<form class="needs-validation" action="/users/userlist"
 					method="post" onsubmit="submitForm()" novalidate>
@@ -113,7 +113,7 @@
 						<div class="col-sm-15">
 							<label for="userName" class="form-label">이름</label> <input
 								type="text" class="form-control" name="userName" placeholder=""
-								value="" required>
+								value="${login.userName }" required>
 							<div class="invalid-feedback">반드시 이름을 입력해주세요.</div>
 						</div>
 
@@ -122,18 +122,10 @@
 							<label for="username" class="form-label">아이디</label>
 							<div class="input-group has-validation">
 								<input type="text" name="userId" id="userId"
-									placeholder="아이디 입력해주세요" required>
-								<div class="invalid-feedback">아이디는 필수입력 사항입니다.</div>
+									value="${login.userId}" readonly>
 							</div>
 						</div>
 
-						<div class="col-3">
-							<label for="username" class="form-label"></label>
-							<div>
-								<button class="w-100 btn btn-primary btn-lg" id="idck"
-									type="button" onclick="idCheck()">중복확인</button>
-							</div>
-						</div>
 
 						<div class="col-12">
 							<label for="userPassword" class="form-label">비밀번호</label>
@@ -163,15 +155,15 @@
 							<label for="email" class="form-label">Email <span
 								class="text-muted">(필수 입력)</span></label> <input type="email"
 								class="form-control" name="userEmail"
-								placeholder="올바른 이메일 형식을 입력하세요" required>
+								value="${login.userEmail }" required>
 							<div class="invalid-feedback">이메일 주소가 올바른지 확인해주세요</div>
 						</div>
 
 						<div class="col-12">
 							<label for="phone" class="form-label">핸드폰 번호 <span
-								class="text-muted">(필수 입력)</span></label> <input type="text"
+								class="text-muted">(-를 제외한 번호를 입력해 주세요)</span></label> <input type="text"
 								class="form-control" name="userPhone"
-								placeholder="-는 제외한 번호를 입력해주세요" required>
+								value="${login.userPhone }" required>
 							<div class="invalid-feedback">핸드폰 번호가 올바른지 확인해주세요</div>
 						</div>
 
@@ -179,14 +171,14 @@
 							<label for="skills" class="form-label">사용 스킬 <span
 								class="text-muted">(필수 입력)</span></label> <input type="text"
 								class="form-control" name="userSkill"
-								placeholder="가지고 있는 대표 스킬 입력해주세요" required>
+								value="${login.userSkill }" required>
 							<div class="invalid-feedback">스킬에 해당하는 내용을 입력해주세요.</div>
 						</div>
 
 						<div class="col-12">
 							<label for="address" class="form-label">주소</label> <input
 								type="text" class="form-control" name="basicAddress"
-								id="basicAddress" placeholder="무슨 동" required>
+								id="basicAddress" value="${login.basicAddress }" required>
 							<div class="invalid-feedback">현재 주소와 맞는지 다시 한번 확인해주세요</div>
 						</div>
 
@@ -195,14 +187,14 @@
 							<span> <label for="address2" class="form-label">상세
 									주소 <span class="text-muted">(Optional)</span>
 							</label> <input type="text" class="form-control" name="userAddressDetail"
-								id="userAddressDetail" placeholder="아파트 동수 혹은 빌라 이름">
+								id="userAddressDetail"  value="${login.userAddressDetail }">
 							</span>
 						</div>
 
 						<div class="col-sm-4">
 							<span> <label for="zip" class="form-label">우편번호</label> <input
 								type="text" class="form-control" id="zip" name="zip"
-								placeholder="">
+								value="${login.zip }">
 							</span>
 						</div>
 
@@ -218,8 +210,8 @@
 					<hr class="my-4">
 
 					<button style="margin-bottom: 5px"
-						class="w-100 btn btn-primary btn-lg" type="submit" id="join">회원가입</button>
-					<button class="w-100 btn btn-primary btn-lg" type="reset">가입취소</button>
+						class="w-100 btn btn-primary btn-lg" type="submit" id="infofix">정보 수정</button>
+					<button class="w-100 btn btn-primary btn-lg" type="button" onclick="location.href='http://localhost:8080/users/delete/${login.userId}'">회원 탈퇴</button>
 				</form>
 			</div>
 		</div>
@@ -347,7 +339,7 @@
  });
 </script>
 
-<script>
+	<script>
 	 $('#userPassword').blur(function(){
 		 var passwd = $('#userPassword').val();
 	     var passwdck = $('#passwordCheck').val();
